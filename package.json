@@ -1,0 +1,16 @@
+{
+  "name": "image-mocker",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "description": "image-mocker",
+  "main": "index.js",
+  "repository": "git@github.com:l4503071/image-mocker.git",
+  "author": "孙亮 <sunliang@qudian.com>",
+  "license": "MIT",
+  "dependencies": {
+    "canvas": "^2.3.1",
+    "koa": "^2.7.0"
+  }
+}
