@@ -1,5 +1,9 @@
 const Koa = require('koa');
-const { createCanvas } = require('canvas');
+const path = require("path")
+// const { createCanvas } = require('canvas');
+const Canvas = require('canvas');
+const { createCanvas } = Canvas;
+Canvas.registerFont('Arial Bold.ttf', {family: 'Arial Bold'});
 
 function createImage(width, height, fColor, bColor) {
   const canvas = createCanvas(width, height);
@@ -7,7 +11,7 @@ function createImage(width, height, fColor, bColor) {
   ctx.fillStyle = fColor;
   ctx.fillRect(0, 0, width, height);
   ctx.fillStyle = bColor;
-  ctx.font = '24px';
+  ctx.font = '24px "Arial Bold"';
   ctx.textAlign = 'center';
   ctx.fillText(`${width} X ${height}`, width / 2, height / 2);
   return canvas.toDataURL();
