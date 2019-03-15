@@ -14,7 +14,19 @@ function createImage(width, height, fColor, bColor) {
   ctx.font = '24px "Arial Bold"';
   ctx.textAlign = 'center';
   ctx.fillText(`${width} X ${height}`, width / 2, height / 2);
-  return canvas.toDataURL();
+  return {
+    code: 0,
+    message: `width: 宽度, height: 高度, fColor: 文字颜色, bColor: 背景色`,
+    params: {
+      width,
+      height,
+      fColor,
+      bColor,
+    },
+    data: {
+      url: canvas.toDataURL()
+    }
+  }
 }
 
 const app = new Koa();
