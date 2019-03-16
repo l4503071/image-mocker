@@ -26,6 +26,9 @@ app.use(async (ctx, next) => {
     return ctx.body = '请使用 GET 请求方法，且请求路径为 /image-mocker';
   }
   const { width = 200, height = 200, fColor = '#eee', bColor = '#000' } = ctx.query;
+  if (isNaN(width) || isNaN(height)) {
+    return ctx.body = 'width 或 height 必须为数字'
+  }
   const res = await createImage(Number(width), Number(height), fColor, bColor);
   ctx.set('Cache-Control', 'no-cache');
   ctx.type = 'image/png';
