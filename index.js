@@ -1,6 +1,6 @@
 const Koa = require('koa');
 const path = require("path")
-// const { createCanvas } = require('canvas');
+const cors = require('koa2-cors');
 const Canvas = require('canvas');
 const { createCanvas } = Canvas;
 Canvas.registerFont('Arial Bold.ttf', {family: 'Arial Bold'});
@@ -30,6 +30,7 @@ function createImage(width, height, fColor, bColor) {
 }
 
 const app = new Koa();
+app.use(cors());
 app.use(async (ctx, next) => {
   const method = ctx.method;
   const path = ctx.path;
@@ -38,6 +39,7 @@ app.use(async (ctx, next) => {
   }
   const { width = 200, height = 200, fColor = '#eee', bColor = '#000' } = ctx.query;
   const res = await createImage(Number(width), Number(height), fColor, bColor);
+  ctx.set('Cache-Control', 'no-cache');
   ctx.body = res;
 })
 
