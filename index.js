@@ -14,19 +14,7 @@ function createImage(width, height, fColor, bColor) {
   ctx.font = '24px "Arial Bold"';
   ctx.textAlign = 'center';
   ctx.fillText(`${width} X ${height}`, width / 2, height / 2);
-  return {
-    code: 0,
-    message: `width: 宽度, height: 高度, fColor: 文字颜色, bColor: 背景色`,
-    params: {
-      width,
-      height,
-      fColor,
-      bColor,
-    },
-    data: {
-      url: canvas.toDataURL()
-    }
-  }
+  return canvas.createPNGStream();
 }
 
 const app = new Koa();
@@ -40,6 +28,8 @@ app.use(async (ctx, next) => {
   const { width = 200, height = 200, fColor = '#eee', bColor = '#000' } = ctx.query;
   const res = await createImage(Number(width), Number(height), fColor, bColor);
   ctx.set('Cache-Control', 'no-cache');
+  ctx.type = 'image/png';
+  ctx.attachment('image.png');
   ctx.body = res;
 })
 
